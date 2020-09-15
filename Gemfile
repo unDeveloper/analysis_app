@@ -31,10 +31,11 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # extra gems for project
 
 gem 'devise'
-
 gem 'activestorage-validator'
-
 gem "sidekiq"
+
+gem 'faraday'
+gem 'faraday_middleware', '>=0.12' # JSON parsing, etc.
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
