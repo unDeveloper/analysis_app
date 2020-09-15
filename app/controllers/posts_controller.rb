@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  SENTIM_ENDPOINT = 'https://sentim-api.herokuapp.com/api/v1/'
 
   # GET /posts
   # GET /posts.json
@@ -10,6 +11,19 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    # Foreach to read files in Post
+    payload = {
+      text: 'In vestibulum lacinia diam, nec egestas libero hendrerit id. Mauris vitae mi eu tortor auctor ultrices pretium id risus.'
+    }.to_json
+    raw_response = Faraday.new(url: SENTIM_ENDPOINT)
+                           .post(
+                               nil,
+                               payload,
+                               accept: 'application/json',
+                               'content-type': 'application/json'
+                           )
+    @sentim_response = JSON.parse(raw_response.body)
+    #puts @sentim_response
   end
 
   # GET /posts/new
